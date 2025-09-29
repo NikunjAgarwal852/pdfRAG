@@ -1,0 +1,94 @@
+{
+  "storedSource": true,
+  "analyzers": [
+    {
+      "name": "english_math",
+      "charFilters": [
+        {
+          "type": "mapping",
+          "mappings": [
+            "₀=>0",
+            "₁=>1",
+            "₂=>2",
+            "₃=>3",
+            "₄=>4",
+            "₅=>5",
+            "₆=>6",
+            "₇=>7",
+            "₈=>8",
+            "₉=>9",
+            "₊=>+",
+            "₋=>-",
+            "₌=>=",
+            "₍=>(",
+            "₎=>)",
+            "ₐ=>a",
+            "ₑ=>e",
+            "ₒ=>o",
+            "ₓ=>x",
+            "ₕ=>h",
+            "ₖ=>k",
+            "ₗ=>l",
+            "ₘ=>m",
+            "ₙ=>n",
+            "ₚ=>p",
+            "ₛ=>s",
+            "ₜ=>t"
+          ]
+        },
+        {
+          "type": "patternReplace",
+          "pattern": "\\s*_\\s*",
+          "replacement": "_"
+        }
+      ],
+      "tokenizer": {
+        "type": "standard"
+      },
+      "tokenFilters": [
+        { "type": "lowercase" },
+        { "type": "asciifolding" },
+        {
+          "type": "word_delimiter_graph",
+          "generateWordParts": true,
+          "generateNumberParts": true,
+          "splitOnCaseChange": false,
+          "splitOnNumerics": false,
+          "preserveOriginal": true,
+          "catenateAll": false
+        },
+        { "type": "stemmer", "stemmer": "english" },
+        { "type": "synonym", "synonyms": "defs_syn" }
+      ]
+    }
+  ],
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "text": {
+        "type": "string",
+        "analyzer": "english_math",
+        "searchAnalyzer": "english_math"
+      },
+      "sectionPath": {
+        "type": "stringFacet"
+      },
+      "type": {
+        "type": "stringFacet"
+      },
+      "docId": {
+        "type": "stringFacet"
+      }
+    }
+  },
+  "synonyms": [
+    {
+      "name": "defs_syn",
+      "source": {
+        "inline": [
+          "defn,definition,means,denotes,let"
+        ]
+      }
+    }
+  ]
+}
