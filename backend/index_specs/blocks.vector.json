@@ -1,0 +1,27 @@
+{
+"type": "vectorSearch",
+"fields": [
+{
+"type": "vector",
+"path": "embedding.vector",
+"numDimensions": 1536,
+"similarity": "cosine",
+"hnsw": {
+"m": 16,
+"efConstruction": 200
+}
+},
+{
+"type": "filter",
+"path": "docId"
+},
+{
+"type": "filter",
+"path": "type"
+},
+{
+"type": "filter",
+"path": "sectionPath"
+}
+]
+}
